@@ -1,0 +1,13 @@
+package Tk::Toplevel;
+sub FG_Create{my$t=shift;
+unless(exists$t->{'_fg'}){$t->{'_fg'}=1;
+$t->bind('<FocusIn>',sub{my$w=shift;
+my$Ev=$w->XEvent;
+$t->FG_In($w,$Ev->d);});
+$t->bind('<FocusOut>',sub{my$w=shift;
+my$Ev=$w->XEvent;
+$t->FG_Out($w,$Ev->d);});
+$t->bind('<Destroy>',sub{my$w=shift;
+my$Ev=$w->XEvent;
+$t->FG_Destroy($w);});
+$t->OnDestroy([$t,'FG_Destroy']);}}1;

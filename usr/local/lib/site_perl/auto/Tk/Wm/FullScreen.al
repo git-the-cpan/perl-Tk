@@ -1,0 +1,15 @@
+package Tk::Wm;
+sub FullScreen{my$w=shift;
+my$over=(@_)?shift:0;
+my$width=$w->screenwidth;
+my$height=$w->screenheight;
+$w->GeometryRequest($width,$height);
+$w->overrideredirect($over&1);
+$w->Post(0,0);
+$w->update;
+if($over&2){my$x=$w->rootx;
+my$y=$w->rooty;
+$width-=2*$x;
+$height-=$x+$y;
+$w->GeometryRequest($width,$height);
+$w->update;}}1;

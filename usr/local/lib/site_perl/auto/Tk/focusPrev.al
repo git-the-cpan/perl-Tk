@@ -1,0 +1,18 @@
+package Tk;
+sub focusPrev{my$w=shift;
+my$cur=$w;
+my@children;
+my$i;
+my$parent;
+while(1){if($cur->toplevel()==$cur){$parent=$cur;
+@children=$cur->FocusChildren();
+$i=@children;}else{$parent=$cur->parent();
+@children=$parent->FocusChildren();
+$i=lsearch(\@children,$cur);}while($i>0){$i--;
+$cur=$children[$i];
+next if($cur->toplevel()==$cur);
+$parent=$cur;
+@children=$parent->FocusChildren();
+$i=@children;}$cur=$parent;
+if($cur==$w||$cur->FocusOK){$cur->tabFocus;
+return;}}}1;

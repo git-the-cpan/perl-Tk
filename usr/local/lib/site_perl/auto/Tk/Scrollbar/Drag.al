@@ -1,0 +1,10 @@
+package Tk::Scrollbar;
+sub Drag{my$w=shift;
+my$e=$w->XEvent;
+return unless(defined$initMouse);
+my$f=$w->fraction($e->x,$e->y);
+my$delta=$f-$initMouse;
+if($w->cget('-jump')){if(@initValues==2){$w->set($initValues[0]+$delta,$initValues[1]+$delta);}else{$delta=int($delta*$initValues[0]);
+$initValues[2]+=$delta;
+$initValues[3]+=$delta;
+$w->set(@initValues);}}else{$w->ScrlToPos($initPos+$delta);}}1;

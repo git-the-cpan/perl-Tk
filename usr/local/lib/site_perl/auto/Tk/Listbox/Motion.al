@@ -1,0 +1,11 @@
+package Tk::Listbox;
+sub Motion{my$w=shift;
+my$el=shift;
+if(defined($Prev)&&$el==$Prev){return;}$anchor=$w->index('anchor');
+my$mode=$w->cget('-selectmode');
+if($mode eq 'browse'){$w->selectionClear(0,'end');
+$w->selectionSet($el);
+$Prev=$el;}elsif($mode eq 'extended'){$i=$Prev;
+if($w->selectionIncludes('anchor')){$w->selectionClear($i,$el);
+$w->selectionSet('anchor',$el)}else{$w->selectionClear($i,$el);
+$w->selectionClear('anchor',$el)}while($i<$el&&$i<$anchor){if(Tk::lsearch(\@Selection,$i)>=0){$w->selectionSet($i)}$i+=1}while($i>$el&&$i>$anchor){if(Tk::lsearch(\@Selection,$i)>=0){$w->selectionSet($i)}$i+=-1}$Prev=$el}}1;
